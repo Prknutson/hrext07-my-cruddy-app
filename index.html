@@ -24,19 +24,34 @@ container for the response-feedback (start with alert)
 -->
 </head>
 <body>
-
-<div class="container-main">
+<div class="grid-container-main">
   <header>My Cruddy App</header>
-  <div class="container-form">
-    <input type="text" class="input-key" placeholder="enter key">
-    <input type="text" class="input-value" placeholder="enter value">
-    <button class="btn-add">Submit</button>
-    <button class="btn-update">Update</button>
-    <button class="btn-delete">Delete</button>
-    <button class="btn-clear">Clear</button>
-  </div>
-  <div class="container-data"></div>
+  <div class="grid-container-table">
+
 </div>
+  <button class="btn-new">Add New Task</button>
+</div>
+
+<div class="form-popup" id="myForm">
+  <div class="container-form">
+    <input type="text" class="input-key" placeholder="enter key" style="display:none">
+    <input type="text" class="input-parent" placeholder="enter key" style="display:none" >
+
+    <span><input type="checkbox" class="input-completed"> Completed</input></span><br>
+    <span class="nowrap">Name: <input type="text" class="input-name" value="complete" placeholder="task name"></span><br>
+    <span class="nowrap">Description: <textarea class="input-description" cols="80" rows="6"></textarea>
+    </span><br>
+    <span class="nowrap">Due Date: <input type="date" class="input-due-date" placeholder="due date"></span>
+    
+    <br><span class="nowrap">
+      <button class="btn-update">Update</button>
+      <button class="btn-delete">Delete</button>
+      <button class="btn-close">Close</button>
+    </span>
+  </div>
+</div>
+
+
 
 </body>
 </html>
