@@ -1,0 +1,230 @@
+    .grid-container-table
+    {
+      display:grid;
+      grid-template-columns: 0.25fr 0.5fr 1fr 3fr 1fr;
+      font-family: sans-serif;
+    }
+    .grid-cell-header{
+      
+      text-align: center;
+      font-weight: bold;
+      background: grey;
+      color:white;
+
+
+    }
+    .grid-cell{
+      border: 1px solid rgba(0,0,0,0.5);
+    }
+
+    .grid-container-subtable { 
+      grid-column-start: 2; 
+      grid-column-end: 6;
+      border:1px solid;
+      display:none;
+      grid-template-columns:  0.5fr 1fr 3fr 1fr;
+      font-family: sans-serif; 
+    }
+
+    .evenRow{
+      background: lightgrey;
+    }
+
+    .container-table
+    {
+      border: 1px solid #1C6EA4;
+      width: 100%;
+      text-align: left;
+      border-collapse: collapse;
+      font-family: sans-serif;
+      margin: 0 auto;
+      table-layout: fixed;
+    }
+
+    .container-table-header
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+/*        border: 1px solid #AAAAAA;
+        padding: 3px 2px;
+*/        width: 100%;
+        position: relative;
+
+    }
+    .container-table-data
+    {
+        display: table-row;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .container-table-row
+    {
+        display: table-row;
+        width: 100%;
+    }
+    .container-table-row:nth-of-type(odd) {
+        background: #e0e0e0;
+    }
+ 
+    .container-subtable-header{
+        display: none;
+        box-shadow: 3px 3px 5px #535353;
+        border: 3px solid #f1f1f1;
+        font-size:small;
+        z-index: 9;
+        width: 100%;
+    }
+
+    .container-subtable
+    {
+      border: 1px solid #1C6EA4;
+      width: 100%;
+      text-align: left;
+      border-collapse: collapse;
+      font-family: sans-serif;
+      display: none;
+    }
+
+    .container-subtable-header
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+        border: 1px solid #AAAAAA;
+        padding: 3px 2px;
+        width:100%;
+    }
+    .container-subtable-data
+    {
+        display: table-row;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .container-subtable-row
+    {
+        display: table-row;
+        width: 100%;
+    }
+    .container-subtable-row:nth-of-type(odd) {
+        background: #e0e0e0;
+    }
+  
+
+  .cell-header
+    {
+        display: table-cell;
+     /*   border: solid;
+        border-width: thin;*/
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .cell
+    {
+        display: table-cell;
+         border: solid;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+    }
+    .cell-chevron
+    {
+        border: solid;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: default;
+        display:flex;
+        align-items:center;
+        justify-content: flex-end;
+    }
+    .cell-nowrap
+    {
+        white-space: nowrap;
+    }
+    .cell-checkbox
+    {
+        display: table-cell;
+        border: solid;
+        border-width: thin;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+    }
+
+.nowrap {
+    white-space: nowrap;
+}
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.btn-new, .btn-update, .btn-delete, .btn-close  {
+  background-color: #555;
+  color: white;
+  padding: 3px 3px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+ }
+ .btn-new{
+    margin:3px;
+ }
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  box-shadow: 3px 3px 5px #535353;
+  border-radius: 6px 6px 6px 6px;  
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  width: 400px;
+}
+
+/* Add styles to the form container */
+.container-form {
+  max-width: 800px;
+  padding: 10px;
+  background-color: white;
+  font-family: sans-serif;
+  font-size:small;
+}
+
+/* Full-width input fields */
+.container-form input[type=text] {
+
+}
+
+/* When the inputs get focus, do something */
+.container-form input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.container-form .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+.input-description{
+  width : 200px;
+}
+
+/* Add a red background color to the cancel button */
+.container-form .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.container-form .btn:hover, .open-button:hover {
+  opacity: 1;
+}
