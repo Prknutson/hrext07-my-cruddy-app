@@ -1,8 +1,9 @@
     .grid-container-table
     {
       display:grid;
-      grid-template-columns: 0.25fr 0.5fr 1fr 3fr 1fr;
+      grid-template-columns: 0.25fr 0.6fr 1fr 3fr 1fr;
       font-family: sans-serif;
+      padding: 20px;
     }
     .grid-cell-header{
       
@@ -10,8 +11,6 @@
       font-weight: bold;
       background: grey;
       color:white;
-
-
     }
     .grid-cell{
       border: 1px solid rgba(0,0,0,0.5);
@@ -22,8 +21,9 @@
       grid-column-end: 6;
       border:1px solid;
       display:none;
-      grid-template-columns:  0.5fr 1fr 3fr 1fr;
+      grid-template-columns:  0.6fr 1fr 3fr 1fr;
       font-family: sans-serif; 
+      padding: 3px;
     }
 
     .evenRow{
@@ -157,8 +157,23 @@
 
 .nowrap {
     white-space: nowrap;
-}
-
+    }
+    
+    .header-container{
+      display:flex;
+      flex-direction: row;
+      padding: 3px 80px;
+      justify-content: space-between;
+      font-family: sans-serif;
+    }
+    .header-filter{
+      display: flex;
+      align-items: flex-end;
+    }
+  .tags-filter{
+      display: flex;
+      align-items: flex-end;
+    }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .btn-new, .btn-update, .btn-delete, .btn-close  {
@@ -172,6 +187,9 @@
  .btn-new{
     margin:3px;
  }
+ .btn-container{
+  padding: 0px 20px;
+ }
 
 /* The popup form - hidden by default */
 .form-popup {
@@ -181,16 +199,14 @@
   border-radius: 6px 6px 6px 6px;  
   border: 3px solid #f1f1f1;
   z-index: 9;
-  width: 400px;
+  width: 600px;
 }
 
 /* Add styles to the form container */
 .container-form {
-  max-width: 800px;
   padding: 10px;
   background-color: white;
   font-family: sans-serif;
-  font-size:small;
 }
 
 /* Full-width input fields */
@@ -216,7 +232,8 @@
   opacity: 0.8;
 }
 .input-description{
-  width : 200px;
+  width : 300px;
+  font-size:large;
 }
 
 /* Add a red background color to the cancel button */
