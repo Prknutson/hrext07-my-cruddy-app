@@ -1,8 +1,10 @@
 var taskList = [];
 var nextKey;
+var completedFilter;
+var tagFilter = '';
 
 class Task  {
-  constructor(id, shortName, description, dueDate, completed, parentID){
+  constructor(id, shortName, description, dueDate, completed, parentID, tags){
     if(id[0] === '{'){
       var obj = JSON.parse(id);
       for (var key in obj){
@@ -15,6 +17,7 @@ class Task  {
       this.dueDate = dueDate;
       this.completed = completed;
       this.parentID = parentID;
+      this.tags = tags;
     }
   }
 
@@ -28,11 +31,10 @@ var updateData = function(task){
   var taskFound = false;
   for (var item in taskList){
     if (taskList[item].id === task.id) {
-      for (var key in taskList[item]){
+      for (var key in task){
         taskList[item][key] = task[key];
       }
-
-      taskFound = true;
+    taskFound = true;
     }
   }
   if(!taskFound){
@@ -41,6 +43,15 @@ var updateData = function(task){
  // console.log(taskList);
   localStorage.setItem('taskData', JSON.stringify(taskList));
 }
+
+var filterOnTag = function(taskTag){
+  if(tagFilter.trim() === ''){
+    return true;
+  }
+  else{
+    return taskTag.includes(tagFilter);
+  }
+} 
 
 var loadTableData = function(fromArray){
   if(!fromArray){  //Only load data from taskList Array on load of page.
@@ -54,14 +65,25 @@ var loadTableData = function(fromArray){
   var $gridDataContainer = $('.grid-container-table');
   $gridDataContainer.empty();
     
-  var gridHeaderRowString = '<div class="grid-cell-header"></div><div class="grid-cell-header"><p>Completed</p></div><div class="grid-cell-header"><p>Task</p></div><div class="grid-cell-header"><p>Description</p></div><div class="grid-cell-header"><p>Due Date</p></div>';
+  var gridHeaderRowString = '<div class="grid-cell-header"></div><div class="grid-cell-header"><p>Status</p></div><div class="grid-cell-header"><p>Task</p></div><div class="grid-cell-header"><p>Description</p></div><div class="grid-cell-header"><p>Due Date</p></div>';
   
   $gridDataContainer.append(gridHeaderRowString);
 
   var rowStyle =  "oddRow";
+  var statusFilter = [];
+  
+
+  if(completedFilter === 'All'){
+    statusFilter = [true, false];
+
+  }else if(completedFilter === 'true'){
+    statusFilter = [true];
+  }else{
+    statusFilter = [false];
+  }
 
   for (var task in taskList){
-     if(taskList[task].parentID === '0'){
+     if(taskList[task].parentID === '0' && statusFilter.includes(taskList[task].completed) && filterOnTag(taskList[task].tags) ){
         
         divRowString = "";
         if(taskList[task].completed){
@@ -80,7 +102,7 @@ var loadTableData = function(fromArray){
           rowStyle = "oddRow";
         }
         var subRowStyle =  "oddRow";
-        var subRowString = `<div class="grid-container-subtable" id="parent${taskList[task].id}"><div class="grid-cell-header"><p>Completed</p></div><div class="grid-cell-header"><p>Task</p></div><div class="grid-cell-header"><p>Description</p></div><div class="grid-cell-header"><p>Due Date</p></div>`;
+        var subRowString = `<div class="grid-container-subtable" id="parent${taskList[task].id}"><div class="grid-cell-header"><p>Status</p></div><div class="grid-cell-header"><p>Task</p></div><div class="grid-cell-header"><p>Description</p></div><div class="grid-cell-header"><p>Due Date</p></div>`;
         for (var subtask in taskList){
           if(taskList[task].id===taskList[subtask].parentID){
             if(taskList[subtask].completed){
@@ -134,6 +156,7 @@ var loadTaskIntoForm = function(keyData){
       $('.input-parent').val(taskList[item].parentID);
       $(".input-completed").prop("checked", taskList[item].completed);
       $('.input-name').val(taskList[item].shortName);
+      $('.input-tags').val(taskList[item].tags);
       $('.input-description').val(taskList[item].description);
       $('.input-due-date').val(taskList[item].dueDate);
 
@@ -155,9 +178,20 @@ var deleteTask = function(id){
 
 
 $(document).ready(function(){
+  completedFilter = localStorage.getItem('completedFilter');
   loadTableData();
+
+  //console.log($('#tag-filter'));
   
+  $('.status-filter').val(completedFilter);
+
   $('.input-key').val(nextKey);
+
+  $('.status-filter').change(function(e){
+   completedFilter = $('.status-filter').val();
+   localStorage.setItem('completedFilter', completedFilter);
+   loadTableData(true);
+  });
 
   $('.btn-update').on('click', function(e){
     //console.log(e);
@@ -167,7 +201,7 @@ $(document).ready(function(){
     var nameData = $('.input-name').val();
     var descriptionData = $('.input-description').val();
     var dueDate = $('.input-due-date').val();
-   // console.log($('.input-description'.val()));
+    var tags = $('.input-tags').val();
    
     var completed = false;
     if ($('.input-completed').is(":checked")){
@@ -175,7 +209,7 @@ $(document).ready(function(){
     }
     $('.btn-update').html('Update');
 
-    var newTask = new Task(keyData, nameData, descriptionData, dueDate, completed, parentData);
+    var newTask = new Task(keyData, nameData, descriptionData, dueDate, completed, parentData, tags);
     
     nextKey++;
     $(".input-completed").prop("checked", false);
@@ -183,12 +217,20 @@ $(document).ready(function(){
     $('.input-name').val('');
     $('.input-description').val('');
     $('.input-due-date').val('');
+    $('.input-tags').val('');
     $('.input-completed').val(":unchecked");
     $("#myForm").css("display", "none");
 
     updateData(newTask);
     loadTableData(true);
   });
+
+
+  $('.tag-filter').focusout(function(){
+    tagFilter = $('.tag-filter').val();
+    loadTableData(true);
+  });
+
 
 
   // update db
@@ -243,6 +285,7 @@ $(document).ready(function(){
     $('.input-name').val('');
     $('.input-description').val('');
     $('.input-due-date').val('');
+    $('.input-tags').val('');
     $("#myForm").css("display", "none");
   });
 
@@ -255,6 +298,7 @@ $(document).ready(function(){
        $('.input-parent').val(e.currentTarget.dataset.parentvalue)
      }
     $('.input-name').val('');
+    $('.input-tags').val('');
     $('.input-description').val('');
     $('.btn-update').html('Add');
 
@@ -274,6 +318,7 @@ $(document).ready(function(){
     $('.input-key').val(nextKey);
     $('.input-parent').val("0");
     $('.input-name').val('');
+    $('.input-tags').val('');
     $('.input-description').val('');
     $('.btn-update').html('Add');
 
