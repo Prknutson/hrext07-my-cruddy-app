@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
   <script src="app/app.js"></script>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
   <!--
@@ -24,29 +25,50 @@ container for the response-feedback (start with alert)
 -->
 </head>
 <body>
+<div class="header-container">
+  <div><img src="logo.png" alt="CRUDDY Tasks"></div>
+  <div class="header-filter">Status: 
+    <select class="status-filter">
+      <option value="All">All</option>
+      <option value="true">Completed</option>
+      <option value="false">Incomplete</option>
+    </select>
+  </div>
+  <div class="header-filter">#TAG: <input name="tag-filter" class="tag-filter" type="text"></div>
+</div>
+
 <div class="grid-container-main">
-  <header>My Cruddy App</header>
-  <div class="grid-container-table">
+
+<div class="grid-container-table">
 
 </div>
-  <button class="btn-new">Add New Task</button>
+  <div class="btn-container">
+    <button class="btn-new">Add New Task</button>
+  </div>
 </div>
 
-<div class="form-popup" id="myForm">
-  <div class="container-form">
+
+<div class="form-popup"  id="myForm">
+  <div class="w3-container" style="background-color:#F47D4C">
+    <h2>Task Details</h2>
+  </div>
+  <div class="container-form w3-container">
     <input type="text" class="input-key" placeholder="enter key" style="display:none">
     <input type="text" class="input-parent" placeholder="enter key" style="display:none" >
 
-    <span><input type="checkbox" class="input-completed"> Completed</input></span><br>
-    <span class="nowrap">Name: <input type="text" class="input-name" value="complete" placeholder="task name"></span><br>
-    <span class="nowrap">Description: <textarea class="input-description" cols="80" rows="6"></textarea>
+    <span><input type="checkbox" class="input-completed" > Completed</input></span><br>
+    
+    <span class="nowrap"><label for="input-name">Name</label><input type="text" class="input-name w3-input w3-border" value="complete" placeholder="task name"></span><br>
+    <span class="nowrap"><label for="input-description">Description</label><textarea class="input-description w3-input w3-border" cols="80" rows="3"></textarea>
     </span><br>
-    <span class="nowrap">Due Date: <input type="date" class="input-due-date" placeholder="due date"></span>
+    <span class="nowrap"><label for="input-tags">Tags</label><input type="text" class="input-tags w3-input w3-border" value="" placeholder="#TAGS"></span><br>
+
+    <span class="nowrap"><label for="input-due-date">Due Date</label><input type="date" class="input-due-date w3-input w3-border" placeholder="due date"></span>
     
     <br><span class="nowrap">
-      <button class="btn-update">Update</button>
-      <button class="btn-delete">Delete</button>
-      <button class="btn-close">Close</button>
+      <button class="btn-update w3-btn w3-black">Update</button>
+      <button class="btn-delete w3-btn w3-black">Delete</button>
+      <button class="btn-close w3-btn w3-black">Close</button>
     </span>
   </div>
 </div>
